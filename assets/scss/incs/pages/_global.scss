@@ -1,0 +1,24 @@
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+[dir="rtl"] {
+  &, * {
+    font-family: Tajawal;
+  }
+  .v-card__title {
+    font-family: Tajawal !important;
+  }
+}
+
+.check-no {
+  cursor: auto;
+  .v-ripple__container {
+    display: none !important;
+  }
+  &:before, &:after {
+    display: none;
+  }
+}
