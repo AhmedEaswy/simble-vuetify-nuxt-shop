@@ -1,9 +1,8 @@
 <template>
   <div>
     <v-sheet>
-      <div v-if="product">
-        <div v-if="productStatus === true">
-
+      <div v-if="product && productStatus">
+        <div>
           <v-container>
             <v-row>
               <v-col
@@ -92,13 +91,12 @@
               </v-col>
             </v-row>
           </v-container>
-
-
-
         </div>
-        <div v-else-if="productStatus === false">
-          no products found 404
-        </div>
+      </div>
+      <div v-else-if="!productStatus && !product" class='mt-20'>
+        <v-container class='mt-20'>
+          <Notfound :meesage="$t('product.notfound')"/>
+        </v-container>
       </div>
       <div v-else>
         <v-container>
@@ -123,27 +121,18 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Notfound from '../../components/Notfound'
 
 export default {
   name: "Product",
+  components: { Notfound },
   async asyncData(context) {
-    await context.$axios.get(
-      `products/${context.params.id}`,
-      {
-        headers: {
-          "lang": context.$cookiz.get("lang"),
-          "Content-Type": "application/json",
-          "Authorization": context.$cookiz.get("token")
-        }
-      }).then(res => {
-      context.store.commit("shop/products/SET_SINGLE_PRODUCT", res.data)
-    })
-    // await store.dispatch("shop/products/getProduct", params.id)
+    await context.store.dispatch("shop/products/getProduct", context.params.id)
   },
   data() {
     return {
       isShowLongText: false,
-      activeImagesIndex: 0
+      activeImagesIndex: 0,
     }
   },
 
@@ -153,6 +142,7 @@ export default {
       productStatus: "shop/products/singleProductStatus",
       favProccess: "shop/favourites/favProccess",
       cartProccess: "shop/cart/cartProccess",
+      langRoute: "theme/langRoute",
     }),
     attrs() {
       return {
@@ -176,6 +166,9 @@ export default {
     setActiveImage(index) {
       this.activeImagesIndex = index;
       this.product.image = this.product.images[index];
+    },
+    Route(path) {
+      return this.langRoute + path
     }
   }
 };

@@ -32,7 +32,7 @@
       </v-img>
 
       <v-card-title>
-        <NuxtLink :to="{ path: '/products/' + product.id }" tag="div" class="v-link">
+        <NuxtLink :to="Route(`products/${product.id}`)" tag="div" class="v-link">
           {{ product.name | slice(30) }} {{ product.name.length > 30 ? " ..." : "" }}
         </NuxtLink>
       </v-card-title>
@@ -100,6 +100,7 @@ export default {
     },
     favProccess: function () {return this.$store.getters["shop/favourites/favProccess"]},
     cartProccess: function () {return this.$store.getters["shop/cart/cartProccess"]},
+    langRoute: function () {return this.$store.getters["theme/langRoute"]},
   },
   methods: {
     reserve() {
@@ -112,6 +113,9 @@ export default {
     updateCart(product) {
       this.$store.dispatch('shop/cart/changeCart', product);
     },
+    Route(path) {
+      return this.langRoute + path
+    }
     // addToCart(productId) {
     //   this.$store.dispatch('shopaddToCart', productId);
     // }

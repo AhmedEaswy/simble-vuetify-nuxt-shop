@@ -45,7 +45,7 @@
                   <v-img :src="item.product.image"></v-img>
                 </v-list-item-avatar>
                 <v-list-item-content>
-                  <v-list-item-title> <NuxtLink :to="{ path: '/products/' + item.product.id }" tag="div" class="v-link">{{item.product.name}}</NuxtLink></v-list-item-title>
+                  <v-list-item-title @click='closecart'> <NuxtLink :to="Route(`/products/${item.product.id}`)" tag="div" class="v-link">{{item.product.name}}</NuxtLink></v-list-item-title>
                   <v-list-item-subtitle>${{item.product.price}}</v-list-item-subtitle>
                 </v-list-item-content>
                 <v-spacer></v-spacer>
@@ -108,6 +108,7 @@ export default {
       cartProccess: "shop/cart/cartProccess",
       cart: "shop/cart/cart",
       maxcartItemLength: "shop/cart/maxCartItemLength",
+      langRoute: "theme/langRoute",
     }),
   },
   methods: {
@@ -123,6 +124,9 @@ export default {
     increaseQuantity(product) {
       this.$store.dispatch("shop/cart/updateCartQuantity", { oberation: "add", product: product })
     },
+    Route(path) {
+      return this.langRoute + path
+    }
   }
 };
 </script>

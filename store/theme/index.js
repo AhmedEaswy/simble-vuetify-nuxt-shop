@@ -4,6 +4,7 @@ export const state = () => ({
   theme: themeConfig.app.layout.theme,
   dir: themeConfig.app.layout.lang === "ar" ? "rtl" : "ltr",
   lang: themeConfig.app.layout.lang,
+  mainLang: "en",
   langs: ["en", "ar"],
 })
 
@@ -12,6 +13,8 @@ export const getters = {
   dir: state => state.lang === "ar" ? "rtl" : "ltr",
   langs: state => state.langs,
   isDark: state => state.theme === "dark",
+  isMainLang: state => state.lang === state.mainLang,
+  langRoute: state => state.lang === state.mainLang ? "" : `/${state.lang}/`
 }
 
 export const mutations = {
@@ -25,7 +28,6 @@ export const mutations = {
 
     vm.$vuetify.lang.current = lang;
     vm.$vuetify.rtl = state.dir === 'rtl';
-    console.log(lang)
     vm.$i18n.setLocale(lang)
   },
 

@@ -59,6 +59,9 @@ export default {
     support: "دعم العملاء",
     all_day: "عمل علي مدار الساعه",
   },
+  product: {
+    notfound: "المنتج غير موجود"
+  },
   search: "بحث",
   sort_by: "لترتيب بواسطة",
   price: "السعر",

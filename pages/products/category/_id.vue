@@ -144,7 +144,6 @@
         </div>
         <div v-else-if="loadProducts && !!productsCategory">
           <Notfound :meesage="$t('empty.category')" />
-
         </div>
 
         <v-row

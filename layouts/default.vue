@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app>
+    <v-app :dark='isDark'>
       <v-card
           class="overflow-hidden"
           style="border-radius: 0 !important;"
@@ -31,7 +31,7 @@
               >
 
                 <v-list-item-group>
-                  <v-list-item :to='{ path : "/login" }' v-if='!isAuthenticated'>
+                  <v-list-item :to='{ path : Route("/login") }' v-if='!isAuthenticated'>
                     <v-list-item-icon>
                       <v-icon>mdi-login</v-icon>
                     </v-list-item-icon>
@@ -94,13 +94,13 @@
                   <v-subheader>{{$t('taps')}}</v-subheader>
 
                 </v-list-item-group>
-                <v-list-item :to='{ path : "/" }'>
+                <v-list-item :to='{ path : Route("/") }'>
                   <v-list-item-icon>
                     <v-icon>mdi-home</v-icon>
                   </v-list-item-icon>
                   <v-list-item-title>{{ $t('home') }}</v-list-item-title>
                 </v-list-item>
-                <v-list-item :to='{ path : "/about" }'>
+                <v-list-item :to='{ path : Route("/about") }'>
                   <v-list-item-icon>
                     <v-icon>mdi-information</v-icon>
                   </v-list-item-icon>
@@ -137,13 +137,13 @@
                         <v-list-item-title>{{ $t('categories') }}</v-list-item-title>
                       </v-list-item-content>
                     </template>
-                    <v-list-item :to='{ path: "/products" }'>
+                    <v-list-item :to='{ path: Route("/products") }'>
                       <v-list-item-title>{{ $t("all") }}</v-list-item-title>
                     </v-list-item>
                     <v-list-item
                       v-for="category in categories"
                       :key="category.id"
-                      :to='{ path: `/products/category/${category.id}` }'
+                      :to='{ path: Route(`/products/category/${category.id}`)}'
                     >
                       <v-list-item-content>
                         <v-list-item-title v-text="category.name"></v-list-item-title>
@@ -190,7 +190,7 @@
                 <v-icon v-else>mdi-cart</v-icon>
               </v-btn>
 
-              <v-btn v-if="isAuthenticated" icon :to="{ path: '/profile' }" >
+              <v-btn v-if="isAuthenticated" icon :to="{ path: Route('/profile') }" >
                 <v-avatar size="30">
                   <img
                     :src="user.image"
@@ -199,7 +199,7 @@
                 </v-avatar>
               </v-btn>
 
-              <v-btn v-else icon :to="{ path: '/login' }">
+              <v-btn v-else icon :to="{ path: Route('login') }">
                 <v-icon>mdi-account</v-icon>
               </v-btn>
             </v-app-bar>
@@ -253,7 +253,9 @@ export default {
   },
   computed: {
     ...mapGetters({
+      langRoute: "theme/langRoute",
       lang: "theme/lang",
+      isMainLang: "theme/isMainLang",
       dir: "theme/dir",
       categories: "shop/products/categories",
       isAuthenticated: "auth/isAuthenticated",
@@ -278,6 +280,9 @@ export default {
     openFavourites() {
       this.$store.commit("shop/favourites/openFavourites");
     },
+    Route(path) {
+      return this.langRoute + path
+    }
   },
   beforeMount() {
 
@@ -289,9 +294,11 @@ export default {
       this.$vuetify.lang.current = this.$cookiz.get("lang");
     }
 
+    this.$store.commit("theme/changeTheme", { theme: this.isDark, vm: this})
+
     this.$store.dispatch("shop/cart/getCart");
     this.$store.dispatch("shop/favourites/getFavourites");
-  }
+  },
 }
 </script>
 

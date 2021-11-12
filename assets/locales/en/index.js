@@ -60,6 +60,9 @@ export default {
     support: "Customer Support",
     all_day: "Customer Support",
   },
+  product: {
+    notfound: "Product Not Found"
+  },
   search: "Search",
   sort_by: "Sort By",
   price: "Price",

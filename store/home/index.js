@@ -23,7 +23,6 @@ export const actions = {
         headers: {
           "lang": this.$cookiz.get('lang') || "en",
           "Content-Type": "application/json",
-          "Authorization": this.$cookiz.get('token')
         }
       }).then(res => {
         commit("SET_BANNERS", res.data.data);

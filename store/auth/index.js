@@ -34,14 +34,15 @@ export const actions = {
       {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": this.$cookiz.get("token")
+          "Authorization": this.$cookiz.get("token") || ""
         }
       }
     ).then(res => {
       if (res.data.status === true) {
         commit("SET_USER", res.data.data);
         this.$cookiz.set('token', res.data.data.token)
-        $nuxt.$router.push('/profile');
+        console.log(`${$nuxt.$store.getters["theme/langRoute"]}profile`)
+        $nuxt.$router.push(`${$nuxt.$store.getters["theme/langRoute"]}profile`);
       } else {
         state.errorMessage = res.data.message;
       }

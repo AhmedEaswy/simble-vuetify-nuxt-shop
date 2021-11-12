@@ -45,7 +45,7 @@
                   <v-img :src="item.product.image"></v-img>
                 </v-list-item-avatar>
                 <v-list-item-content>
-                  <v-list-item-title>{{item.product.name}}</v-list-item-title>
+                  <v-list-item-title @click='closeFavourites'> <NuxtLink :to="Route(`/products/${item.product.id}`)" tag="div" class="v-link">{{item.product.name}}</NuxtLink></v-list-item-title>
                   <v-list-item-subtitle>${{item.product.price}}</v-list-item-subtitle>
                 </v-list-item-content>
                 <v-spacer></v-spacer>
@@ -75,6 +75,7 @@ export default {
       dialogStatus: "shop/favourites/favouritesOpen",
       favProccess: "shop/favourites/favProccess",
       favourites: "shop/favourites/favourites",
+      langRoute: "theme/langRoute",
     })
   },
   methods: {
@@ -83,6 +84,9 @@ export default {
     },
     removefavouriteItem(product) {
       this.$store.dispatch("shop/favourites/changeFavourit", product)
+    },
+    Route(path) {
+      return this.langRoute + path
     }
   }
 }

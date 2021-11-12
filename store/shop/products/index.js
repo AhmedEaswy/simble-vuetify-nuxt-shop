@@ -42,7 +42,7 @@ export const actions = {
       {
         headers: {
           "lang": this.$cookiz.get('lang') || "en",
-          "Authorization": this.$cookiz.get("token")
+          "Authorization": this.$cookiz.get("token") || ""
         }
       }).then(res => {
       if (res.data.status === true) {
@@ -65,7 +65,7 @@ export const actions = {
         headers: {
           "lang": this.$cookiz.get('lang') || "en",
           "Content-Type": "application/json",
-          "Authorization": this.$cookiz.get("token")
+          "Authorization": this.$cookiz.get("token") || ""
         }
       }).then(res => {
       commit("SET_PRODUCTS_CATEGORY", res.data);
@@ -86,7 +86,7 @@ export const actions = {
         headers: {
           "lang": this.$cookiz.get('lang') || "en",
           "Content-Type": "application/json",
-          "Authorization": this.$cookiz.get("token")
+          "Authorization": this.$cookiz.get("token") || ""
         }
       }).then(res => {
       commit("SET_SINGLE_PRODUCT", res.data);
