@@ -100,7 +100,7 @@
                   </v-list-item-icon>
                   <v-list-item-title>{{ $t('home') }}</v-list-item-title>
                 </v-list-item>
-                <v-list-item :to='{ path : Route("/about") }'>
+                <v-list-item :to='{ path : Route("about") }'>
                   <v-list-item-icon>
                     <v-icon>mdi-information</v-icon>
                   </v-list-item-icon>
@@ -137,13 +137,13 @@
                         <v-list-item-title>{{ $t('categories') }}</v-list-item-title>
                       </v-list-item-content>
                     </template>
-                    <v-list-item :to='{ path: Route("/products") }'>
+                    <v-list-item :to='{ path: Route("products") }'>
                       <v-list-item-title>{{ $t("all") }}</v-list-item-title>
                     </v-list-item>
                     <v-list-item
                       v-for="category in categories"
                       :key="category.id"
-                      :to='{ path: Route(`/products/category/${category.id}`)}'
+                      :to='{ path: Route(`products/category/${category.id}`)}'
                     >
                       <v-list-item-content>
                         <v-list-item-title v-text="category.name"></v-list-item-title>
@@ -190,7 +190,7 @@
                 <v-icon v-else>mdi-cart</v-icon>
               </v-btn>
 
-              <v-btn v-if="isAuthenticated" icon :to="{ path: Route('/profile') }" >
+              <v-btn v-if="isAuthenticated" icon :to="{ path: Route('profile') }" >
                 <v-avatar size="30">
                   <img
                     :src="user.image"

@@ -43,10 +43,12 @@ export const mutations = {
 export const actions = {
   reCallDataHaveLangHeaders() {
     window.$nuxt.$store.state.shop.products.products = null;
+    window.$nuxt.$store.state.shop.products.categories = null;
     window.$nuxt.$store.dispatch("shop/favourites/clearFavourites")
     window.$nuxt.$store.dispatch("shop/cart/clearCart")
 
     window.$nuxt.$store.dispatch("shop/products/callProducts");
+    window.$nuxt.$store.dispatch("shop/products/getCategories");
     window.$nuxt.$store.dispatch("shop/cart/getCart");
     window.$nuxt.$store.dispatch("shop/favourites/getFavourites");
   },
