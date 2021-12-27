@@ -32,7 +32,7 @@
       </v-img>
 
       <v-card-title>
-        <NuxtLink :to="Route(`products/${product.id}`)" tag="div" class="v-link">
+        <NuxtLink :to="localePath({ name: 'products-id', params: { id: product.id } }, lang)" tag="div" class="v-link">
           {{ product.name | slice(30) }} {{ product.name.length > 30 ? " ..." : "" }}
         </NuxtLink>
       </v-card-title>

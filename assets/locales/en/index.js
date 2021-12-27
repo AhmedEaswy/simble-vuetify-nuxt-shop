@@ -9,6 +9,11 @@ export default {
   logo: "LOGO",
   login_register: "Login & Register",
   logout: "Logout",
+  register: "Register",
+  login: "Login",
+  have_account: "Do You Have an Account ?",
+  not_have_account: "Do Not You Have an Account ?",
+  agree: "Are you agree ?",
   settings: "Settings",
   my_addresses: "My Addresses",
   btn: {
@@ -34,6 +39,7 @@ export default {
   products_list: "Products List",
   total: "Total",
   all: "All",
+  submit: "submit",
   form: {
     email: "Email",
     name: "Name",
@@ -50,8 +56,14 @@ export default {
   },
   valid: {
     index: "This Field is Required",
-    name: "Name is Required",
-    email: "Email is Required",
+    name: {
+      index:  "Name is Required",
+      less_3: "Name must be more than 3 characters",
+    },
+    email: {
+      index: "Email is Required",
+      valid: "E-mail Must be Valid",
+    },
     phone: "Phone is Required",
     password: "Password is Required",
   },

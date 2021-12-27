@@ -31,7 +31,7 @@
               >
 
                 <v-list-item-group>
-                  <v-list-item :to='{ path : Route("/login") }' v-if='!isAuthenticated'>
+                  <v-list-item :to='localePath("login", lang)' v-if='!isAuthenticated'>
                     <v-list-item-icon>
                       <v-icon>mdi-login</v-icon>
                     </v-list-item-icon>
@@ -49,7 +49,7 @@
                       </v-list-item-content>
                     </template>
 
-                    <v-list-item :to="{ path: '/profile' }">
+                    <v-list-item :to='localePath("profile", lang)'>
                       <v-list-item-icon>
                         <v-icon>mdi-cog-outline</v-icon>
                       </v-list-item-icon>
@@ -94,13 +94,13 @@
                   <v-subheader>{{$t('taps')}}</v-subheader>
 
                 </v-list-item-group>
-                <v-list-item :to='{ path : Route("/") }'>
+                <v-list-item :to='localePath("/", lang)'>
                   <v-list-item-icon>
                     <v-icon>mdi-home</v-icon>
                   </v-list-item-icon>
                   <v-list-item-title>{{ $t('home') }}</v-list-item-title>
                 </v-list-item>
-                <v-list-item :to='{ path : Route("about") }'>
+                <v-list-item :to='localePath("about", lang)'>
                   <v-list-item-icon>
                     <v-icon>mdi-information</v-icon>
                   </v-list-item-icon>
@@ -116,7 +116,7 @@
                       <v-list-item-title>{{ $t('languages') }}</v-list-item-title>
                     </v-list-item-content>
                   </template>
-                  <v-list-item  link @click="handleLang(item)" v-for="(item, index) in langs" :key="index">
+                  <v-list-item link @click="handleLang(item)" v-for="(item, index) in langs" :key="index">
 
                     <v-list-item-icon>
                       <v-icon v-if="item === lang">mdi-check</v-icon>
@@ -137,14 +137,15 @@
                         <v-list-item-title>{{ $t('categories') }}</v-list-item-title>
                       </v-list-item-content>
                     </template>
-                    <v-list-item :to='{ path: Route("products") }'>
+                    <v-list-item :to='localePath("products", lang)'>
                       <v-list-item-title>{{ $t("all") }}</v-list-item-title>
                     </v-list-item>
                     <v-list-item
                       v-for="category in categories"
                       :key="category.id"
-                      :to='{ path: Route(`products/category/${category.id}`)}'
+                      :to='localePath({ name: "products-category-id", params: { id: category.id } }, lang)'
                     >
+<!--                      :to='localePath(`products/category/${category.id}`, lang)'-->
                       <v-list-item-content>
                         <v-list-item-title v-text="category.name"></v-list-item-title>
                       </v-list-item-content>
@@ -190,7 +191,7 @@
                 <v-icon v-else>mdi-cart</v-icon>
               </v-btn>
 
-              <v-btn v-if="isAuthenticated" icon :to="{ path: Route('profile') }" >
+              <v-btn v-if="isAuthenticated" icon :to="localePath('profile', lang)" >
                 <v-avatar size="30">
                   <img
                     :src="user.image"
@@ -199,7 +200,7 @@
                 </v-avatar>
               </v-btn>
 
-              <v-btn v-else icon :to="{ path: Route('login') }">
+              <v-btn v-else icon :to="localePath('login', lang)">
                 <v-icon>mdi-account</v-icon>
               </v-btn>
             </v-app-bar>

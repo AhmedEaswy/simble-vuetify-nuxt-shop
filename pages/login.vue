@@ -5,7 +5,7 @@
       class="mx-auto my-12"
       max-width="500">
       <p class="text-h4 text--primary">
-        Login
+        {{ $t('login') }}
       </p>
       <v-form
         ref="form"
@@ -16,7 +16,7 @@
         <v-text-field
           v-model="loginForm.email"
           :rules="emailRules"
-          label="E-mail"
+          :label="$t('form.email')"
           required
           outlined
         ></v-text-field>
@@ -26,7 +26,7 @@
           :rules="[rules.required, rules.min]"
           :type="show1 ? 'text' : 'password'"
           name="input-10-1"
-          label="Password"
+          :label="$t('form.password')"
           hint="At least 8 characters"
           counter
           outlined
@@ -36,7 +36,7 @@
         <v-checkbox
           v-model="checkbox"
           :rules="[v => !!v || 'You must agree to continue!']"
-          label="Do you agree?"
+          :label="$t('agree')"
           required
         ></v-checkbox>
         <v-alert
@@ -55,10 +55,10 @@
           :loading="logProccess"
           @click="submit"
         >
-          Submit
+          {{ $t('submit') }}
         </v-btn>
       </v-form>
-      <p class="mt-5">Do not have an account ? <NuxtLink to="register">Register</NuxtLink></p>
+      <p class="mt-5">{{ $t('not_have_account') }} <NuxtLink :to='localePath("register")'>{{ $t('register') }}</NuxtLink></p>
     </v-card>
   </div>
 </template>
@@ -99,7 +99,8 @@ export default {
     ...mapGetters({
       isAuthenticated: "auth/isAuthenticated",
       errMessage: "auth/errorMessage",
-      logProccess: "auth/logProccess"
+      logProccess: "auth/logProccess",
+      lang: "theme/lang",
     }),
   },
 

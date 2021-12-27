@@ -5,7 +5,7 @@
       class="mx-auto my-12"
       max-width="500">
       <p class="text-h4 text--primary">
-        Register
+        {{ $t('register') }}
       </p>
       <v-form
         ref="form"
@@ -14,15 +14,16 @@
       >
         <v-text-field
           v-model="loginForm.name"
-          :rules="nameRules"
-          label="Name"
+          :rules="[nameRules.required, nameRules.min]"
+
+          :label="$t('form.name')"
           required
           outlined
         ></v-text-field>
         <v-text-field
           v-model="loginForm.email"
-          :rules="emailRules"
-          label="E-mail"
+          :rules="[emailRules.required, emailRules.valid]"
+          :label="$t('form.email')"
           required
           outlined
         ></v-text-field>
@@ -30,7 +31,7 @@
         <v-text-field
           v-model="loginForm.phone"
           :rules="phoneRules"
-          label="Phone"
+          :label="$t('form.phone')"
           required
           outlined
           :counter="11"
@@ -41,17 +42,16 @@
           :rules="[rules.required, rules.min]"
           :type="show1 ? 'text' : 'password'"
           name="input-10-1"
-          label="Password"
+          :label="$t('form.password')"
           hint="At least 8 characters"
           counter
           outlined
           @click:append="show1 = !show1"
         ></v-text-field>
-
         <v-checkbox
           v-model="checkbox"
           :rules="[v => !!v || 'You must agree to continue!']"
-          label="Do you agree?"
+          :label="$t('agree')"
           required
         ></v-checkbox>
         <v-alert
@@ -70,10 +70,10 @@
           :loading="logProccess"
           @click="submit"
         >
-          Submit
+          {{ $t('submit') }}
         </v-btn>
       </v-form>
-      <p class="mt-5">Do not have an account ? <NuxtLink to="register">Register</NuxtLink></p>
+      <p class="mt-5">{{ $t('have_account') }} <NuxtLink :to='localePath("login")'>{{ $t('login', lang) }}</NuxtLink></p>
     </v-card>
   </div>
 </template>
@@ -83,26 +83,22 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "login",
+  name: "register",
   middleware: 'logger',
   data: () => ({
     loading: false,
     valid: true,
     show1: false,
-    nameRules: [
-      v => !!v || 'Name is required',
-      v => (v && v.length > 3) || 'Name must be more than 3 characters',
-    ],
+    // nameRules: [
+    //     v => !!v || "test" + "vm.$('valid.name.index')",
+    //     v => (v && v.length > 3) || "vm.$('valid.name.less_three')",
+    // ],
     loginForm: {
       name: '',
       email: '',
       password: '',
       phone: ''
     },
-    emailRules: [
-      v => !!v || 'E-mail is required',
-      v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-    ],
     phoneRules: [
       v => !!v || 'Phone is required',
       v => v.length === 11 || 'Phone must be 11 characters'
@@ -114,10 +110,36 @@ export default {
       emailMatch: () => (`The email and password you entered don't match`),
     },
     checkbox: false,
+
   }),
 
   computed: {
-    ...mapGetters({isAuthenticated: "auth/isAuthenticated", errMessage: "auth/errorMessage", logProccess: "auth/logProccess"}),
+    ...mapGetters({
+      isAuthenticated: "auth/isAuthenticated",
+      errMessage: "auth/errorMessage",
+      logProccess: "auth/logProccess",
+      lang: "theme/lang",
+    }),
+    vm () {
+      return this;
+    },
+    test() {
+      return this.vm.$t("logo")
+    },
+    nameRules() {
+      return {
+        required: v => !!v || this.vm.$t('valid.name.index'),
+        min: v => v.length >= 3 || this.vm.$t('valid.name.less_3'),
+      }
+    },
+    emailRules() {
+      return {
+        required: v => !!v || this.vm.$t('valid.email.index'),
+        valid: v => /.+@.+\..+/.test(v) || this.vm.$t('valid.email.valid'),
+      }
+    },
+
+
   },
 
   methods: {

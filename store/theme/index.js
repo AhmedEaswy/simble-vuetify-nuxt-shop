@@ -14,7 +14,7 @@ export const getters = {
   langs: state => state.langs,
   isDark: state => state.theme === "dark",
   isMainLang: state => state.lang === state.mainLang,
-  langRoute: state => state.lang === state.mainLang ? "" : `/${state.lang}/`
+  langRoute: state => state.lang === state.mainLang ? "" : `/${state.lang}`
 }
 
 export const mutations = {

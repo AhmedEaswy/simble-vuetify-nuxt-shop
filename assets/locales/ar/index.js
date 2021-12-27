@@ -9,6 +9,12 @@ export default {
   logo: "الشعار",
   login_register: "انشاء حساب او تسجيل دخول",
   logout: "تسجيل خروج",
+  register: "انشاء حساب",
+  login: "تسجيل دخول",
+  have_account: "هل لديك حساب ؟",
+  not_have_account: "ليس لديك حساب ؟",
+  agree: "هل انت موافق ؟",
+  submit: "إرسال",
   settings: "الاعدادات",
   my_addresses: "عناويني",
   btn: {
@@ -49,8 +55,14 @@ export default {
   },
   valid: {
     index: "الحقل مطلوب",
-    name: "الأسم مطلوب",
-    email: "البريد الألكتورني مطلوب",
+    name: {
+      index:  "الأسم مطلوب",
+      less_3: "يجب ان يكون الاسم اكثر من ثلاث احرف",
+    },
+    email: {
+      index: "البريد الألكتورني مطلوب",
+      valid: "يجب ان يكون البريد صالح",
+    },
     phone: "رقم الهاتف مطلوب",
     password: "كلمة السر مطلوب",
   },

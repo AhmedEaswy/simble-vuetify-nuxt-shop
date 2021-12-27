@@ -88,7 +88,6 @@ export default  {
         "ar": ar,
       }
     },
-
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
