@@ -44,7 +44,7 @@ export default {
     email: "Email",
     name: "Name",
     phone: "Phone",
-    Password: "Password",
+    password: "Password",
   },
   cart: {
     name: "Shopping Cart",

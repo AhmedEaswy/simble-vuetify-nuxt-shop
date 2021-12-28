@@ -238,6 +238,7 @@ export default {
       fixed: false,
       group: null,
       model: null,
+      lang: this.$store.state.lang,
       items: [
         {
           icon: 'mdi-apps',
@@ -255,7 +256,7 @@ export default {
   computed: {
     ...mapGetters({
       langRoute: "theme/langRoute",
-      lang: "theme/lang",
+      // lang: "theme/lang",
       isMainLang: "theme/isMainLang",
       dir: "theme/dir",
       categories: "shop/products/categories",

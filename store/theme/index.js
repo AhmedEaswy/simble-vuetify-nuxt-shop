@@ -3,7 +3,7 @@ import themeConfig from '../../themeConfig'
 export const state = () => ({
   theme: themeConfig.app.layout.theme,
   dir: themeConfig.app.layout.lang === "ar" ? "rtl" : "ltr",
-  lang: themeConfig.app.layout.lang,
+  lang: "en",
   mainLang: "en",
   langs: ["en", "ar"],
 })

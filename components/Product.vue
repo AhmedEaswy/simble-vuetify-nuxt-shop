@@ -86,10 +86,16 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 
 export default {
   name: "Product",
   props: ['product'],
+  data () {
+    return {
+      lang: this.$store.state.lang,
+    }
+  },
   computed: {
     attrs() {
       return {
@@ -98,9 +104,11 @@ export default {
         elevation: 2,
       }
     },
-    favProccess: function () {return this.$store.getters["shop/favourites/favProccess"]},
-    cartProccess: function () {return this.$store.getters["shop/cart/cartProccess"]},
-    langRoute: function () {return this.$store.getters["theme/langRoute"]},
+    ...mapGetters({
+      favProccess: "shop/favourites/favProccess",
+      cartProccess: "shop/cart/cartProccess",
+      langRoute: "theme/langRoute",
+    })
   },
   methods: {
     reserve() {
